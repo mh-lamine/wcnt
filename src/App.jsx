@@ -1,69 +1,15 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { RootLayout } from "@/layouts/RootLayout";
-import { LoginPage } from '@/features/auth/pages/LoginPage';
-import { RegisterPage } from '@/features/auth/pages/RegisterPage';
-import { RequireAuth } from "@/features/auth/components/RequireAuth";
+import { LoginPage } from "@/features/auth/pages/LoginPage";
+import { RegisterPage } from "@/features/auth/pages/RegisterPage";
 import { RequireProvider } from "@/features/auth/components/RequireProvider";
+import { HomePage } from "@/features/providers/pages/HomePage";
+import { MyBookingsPage } from "@/features/bookings/pages/MyBookingsPage";
+import { ProfilePage } from "@/features/profile/pages/ProfilePage";
+import { DashboardPage } from "@/features/dashboard/pages/DashboardPage";
+import { ServicesPage } from "@/features/services/pages/ServicesPage";
+import { SchedulePage } from "@/features/schedule/pages/SchedulePage";
 import PWABadge from "./PWABadge";
-
-// Placeholder pages - will be created in next phases
-function HomePage() {
-  return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold">Browse Providers</h1>
-      <p className="text-muted-foreground">Provider list coming soon...</p>
-    </div>
-  );
-}
-
-function MyBookingsPage() {
-  return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold">My Bookings</h1>
-      <p className="text-muted-foreground">Bookings list coming soon...</p>
-    </div>
-  );
-}
-
-function DashboardPage() {
-  return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold">Provider Dashboard</h1>
-      <p className="text-muted-foreground">Dashboard coming soon...</p>
-    </div>
-  );
-}
-
-function ServicesPage() {
-  return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold">My Services</h1>
-      <p className="text-muted-foreground">
-        Services management coming soon...
-      </p>
-    </div>
-  );
-}
-
-function SchedulePage() {
-  return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold">My Schedule</h1>
-      <p className="text-muted-foreground">
-        Schedule management coming soon...
-      </p>
-    </div>
-  );
-}
-
-function ProfilePage() {
-  return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold">Profile</h1>
-      <p className="text-muted-foreground">Profile page coming soon...</p>
-    </div>
-  );
-}
 
 function App() {
   return (
@@ -73,27 +19,16 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
 
-        {/* Protected routes with layout */}
+        {/* Routes with layout */}
         <Route element={<RootLayout />}>
-          {/* Customer routes */}
-          <Route
-            path="/"
-            element={
-              <RequireAuth>
-                <HomePage />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/my-bookings"
-            element={
-              <RequireAuth>
-                <MyBookingsPage />
-              </RequireAuth>
-            }
-          />
+          {/* Public customer routes */}
+          <Route path="/" element={<HomePage />} />
 
-          {/* Provider routes */}
+          {/* Customer routes with auth gate inside */}
+          <Route path="/my-bookings" element={<MyBookingsPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+
+          {/* Provider routes - fully protected */}
           <Route
             path="/dashboard"
             element={
@@ -118,20 +53,10 @@ function App() {
               </RequireProvider>
             }
           />
-
-          {/* Shared routes */}
-          <Route
-            path="/profile"
-            element={
-              <RequireAuth>
-                <ProfilePage />
-              </RequireAuth>
-            }
-          />
         </Route>
 
-        {/* Catch all - redirect to login */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        {/* Catch all - redirect to home */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
 
       <PWABadge />

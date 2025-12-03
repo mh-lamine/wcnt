@@ -1,0 +1,17 @@
+import { useAuth } from '@/features/auth/hooks/useAuth';
+import { PleaseLogin } from '@/features/auth/components/PleaseLogin';
+
+export function MyBookingsPage() {
+  const { isAuthenticated } = useAuth();
+
+  if (!isAuthenticated) {
+    return <PleaseLogin message="Connectez-vous pour consulter vos réservations ou modifier votre profil." />;
+  }
+
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl font-bold">My Bookings</h1>
+      <p className="text-muted-foreground">Bookings list coming soon...</p>
+    </div>
+  );
+}

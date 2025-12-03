@@ -1,16 +1,21 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '@/features/auth/hooks/useAuth';
-import { Home, Calendar, User, LayoutDashboard, Briefcase, Clock, HandHelping } from 'lucide-react';
+import { Home, Calendar, User, LayoutDashboard, Clock, HandHelping, LogIn } from 'lucide-react';
 
 export function BottomNav() {
   const { role, isAuthenticated } = useAuth();
   const location = useLocation();
 
-  if (!isAuthenticated) return null;
-
   const isActive = (path) => location.pathname === path;
 
-  // Customer navigation
+  // Anonymous user navigation
+  const anonymousNavItems = [
+    { path: '/', icon: Home, label: 'Accueil' },
+    { path: '/my-bookings', icon: Calendar, label: 'Réservations' },
+    { path: '/login', icon: LogIn, label: 'Connexion' },
+  ];
+
+  // Customer navigation (authenticated)
   const customerNavItems = [
     { path: '/', icon: Home, label: 'Accueil' },
     { path: '/my-bookings', icon: Calendar, label: 'Réservations' },
@@ -25,7 +30,15 @@ export function BottomNav() {
     { path: '/profile', icon: User, label: 'Profil' },
   ];
 
-  const navItems = role === 'customers' ? customerNavItems : providerNavItems;
+  // Determine which nav items to show
+  let navItems;
+  if (!isAuthenticated) {
+    navItems = anonymousNavItems;
+  } else if (role === 'customers') {
+    navItems = customerNavItems;
+  } else {
+    navItems = providerNavItems;
+  }
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-card border-t z-50">
