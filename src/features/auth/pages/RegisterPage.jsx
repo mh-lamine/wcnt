@@ -5,7 +5,7 @@ import { toast } from "sonner";
 
 export function RegisterPage() {
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
   });
@@ -205,15 +205,15 @@ export function RegisterPage() {
           </div>
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="name" className="font-medium">
+              <label htmlFor="username" className="font-medium">
                 Name
               </label>
               <input
-                id="name"
+                id="username"
                 type="text"
-                value={formData.name}
+                value={formData.username}
                 onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
+                  setFormData({ ...formData, username: e.target.value })
                 }
                 required
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
