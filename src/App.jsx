@@ -3,7 +3,7 @@ import { RootLayout } from "@/layouts/RootLayout";
 import { LoginPage } from "@/features/auth/pages/LoginPage";
 import { RegisterPage } from "@/features/auth/pages/RegisterPage";
 import { RequireProvider } from "@/features/auth/components/RequireProvider";
-import { HomePage } from "@/features/providers/pages/HomePage";
+import { HomePage } from "@/features/salons/pages/HomePage";
 import { MyBookingsPage } from "@/features/bookings/pages/MyBookingsPage";
 import { ProfilePage } from "@/features/profile/pages/ProfilePage";
 import { DashboardPage } from "@/features/dashboard/pages/DashboardPage";

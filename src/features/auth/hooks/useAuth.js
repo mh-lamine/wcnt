@@ -14,13 +14,13 @@ export function useAuth() {
       setAuth(authData.record);
       return { success: true, role: "customers" };
     } catch {
-      // Try providers
+      // Try salons
       try {
         const authData = await pb
-          .collection("providers")
+          .collection("salons")
           .authWithPassword(email, password);
         setAuth(authData.record);
-        return { success: true, role: "providers" };
+        return { success: true, role: "salons" };
       } catch (error) {
         return { success: false, error: error.message };
       }
