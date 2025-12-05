@@ -1,14 +1,18 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/features/auth/hooks/useAuth';
 import { Button } from '@/shared/components/ui/button';
+import { toast } from 'sonner';
 
 export function Header() {
   const { isAuthenticated, role, logout, auth } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout();
-    navigate('/login');
+    if (window.confirm('Are you sure you want to logout?')) {
+      logout();
+      toast.success('You have been logged out successfully');
+      navigate('/login');
+    }
   };
 
   return (
