@@ -1,16 +1,18 @@
-import { useAtom } from 'jotai';
-import { authAtom } from '@/shared/store/atoms';
-import { pb } from '@/shared/config/pocketbase';
+import { useAtom } from "jotai";
+import { authAtom } from "@/shared/store/atoms";
+import { pb } from "@/shared/config/pocketbase";
 
 export function useAuth() {
   const [auth, setAuth] = useAtom(authAtom);
 
-  const login = async ({email, password}) => {
+  const login = async ({ email, password }) => {
     try {
       // Try customers first
-      const authData = await pb.collection('customers').authWithPassword(email, password);
+      const authData = await pb
+        .collection("customers")
+        .authWithPassword(email, password);
       setAuth(authData.record);
-      return { success: true, role: 'customers' };
+      return { success: true, role: "customers" };
     } catch {
       // Try providers
       try {
@@ -18,7 +20,7 @@ export function useAuth() {
           .collection("providers")
           .authWithPassword(email, password);
         setAuth(authData.record);
-        return { success: true, role: 'providers' };
+        return { success: true, role: "providers" };
       } catch (error) {
         return { success: false, error: error.message };
       }
@@ -30,16 +32,17 @@ export function useAuth() {
     setAuth(null);
   };
 
-  const register = async (data, role) => {
+  const register = async (data) => {
     try {
-      const collection = role === 'customer' ? 'customers' : 'providers';
-      const record = await pb.collection(collection).create(data);
+      await pb.collection("customers").create(data);
 
       // Auto-login after registration
-      const authData = await pb.collection(collection).authWithPassword(data.email, data.password);
+      const authData = await pb
+        .collection("customers")
+        .authWithPassword(data.email, data.password);
       setAuth(authData.record);
 
-      return { success: true, role: collection };
+      return { success: true };
     } catch (error) {
       return { success: false, error: error.message };
     }
@@ -51,6 +54,6 @@ export function useAuth() {
     logout,
     register,
     isAuthenticated: !!auth,
-    role: auth?.collectionName
+    role: auth?.collectionName,
   };
 }

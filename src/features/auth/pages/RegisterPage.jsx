@@ -5,7 +5,8 @@ import { toast } from "sonner";
 
 export function RegisterPage() {
   const [formData, setFormData] = useState({
-    username: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
   });
@@ -17,7 +18,10 @@ export function RegisterPage() {
     e.preventDefault();
 
     setLoading(true);
-    const response = await register(formData, "customers");
+    const response = await register({
+      ...formData,
+      passwordConfirm: formData.password,
+    });
     setLoading(false);
 
     if (response.success) {
@@ -205,15 +209,30 @@ export function RegisterPage() {
           </div>
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="username" className="font-medium">
-                Name
+              <label htmlFor="firstName" className="font-medium">
+                Prénom
               </label>
               <input
-                id="username"
+                id="firstName"
                 type="text"
-                value={formData.username}
+                value={formData.firstName}
                 onChange={(e) =>
-                  setFormData({ ...formData, username: e.target.value })
+                  setFormData({ ...formData, firstName: e.target.value })
+                }
+                required
+                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+              />
+            </div>
+            <div>
+              <label htmlFor="lastName" className="font-medium">
+                Nom
+              </label>
+              <input
+                id="lastName"
+                type="text"
+                value={formData.lastName}
+                onChange={(e) =>
+                  setFormData({ ...formData, lastName: e.target.value })
                 }
                 required
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
