@@ -25,46 +25,43 @@ export function ProfilePage() {
       <div className="space-y-6">
         {/* Profile Header */}
         <div className="border-b pb-4">
-          <h1 className="text-3xl font-bold">Profile</h1>
+          <h1 className="text-3xl font-bold">Profil</h1>
           <p className="text-muted-foreground mt-2">
-            Manage your account settings and preferences
+            Gérez les paramètres de votre compte
           </p>
         </div>
 
         {/* Profile Information */}
         <div className="bg-card border rounded-lg p-6 space-y-4">
-          <h2 className="text-xl font-semibold">Account Information</h2>
+          <h2 className="text-xl font-semibold">Infomations du compte</h2>
 
           <div className="space-y-3">
             <div>
               <p className="text-sm text-muted-foreground">Email</p>
-              <p className="font-medium">{auth?.email || 'Not available'}</p>
-            </div>
-
-            <div>
-              <p className="text-sm text-muted-foreground">Name</p>
               <p className="font-medium">
-                {auth?.firstName && auth?.lastName
-                  ? `${auth.firstName} ${auth.lastName}`
-                  : auth?.username || 'Not available'}
+                {auth?.email || "Information manquante"}
               </p>
             </div>
 
             <div>
-              <p className="text-sm text-muted-foreground">Account Type</p>
-              <p className="font-medium capitalize">{auth?.collectionName || 'Customer'}</p>
+              <p className="text-sm text-muted-foreground">Nom</p>
+              <p className="font-medium">
+                {auth?.firstName && auth?.lastName
+                  ? `${auth.firstName} ${auth.lastName}`
+                  : auth?.username || "Information manquante"}
+              </p>
             </div>
 
             <div>
-              <p className="text-sm text-muted-foreground">Member Since</p>
+              <p className="text-sm text-muted-foreground">Membre depuis le</p>
               <p className="font-medium">
                 {auth?.created
-                  ? new Date(auth.created).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
+                  ? new Date(auth.created).toLocaleDateString("fr-FR", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
                     })
-                  : 'Not available'}
+                  : "Information manquante"}
               </p>
             </div>
           </div>
@@ -72,31 +69,34 @@ export function ProfilePage() {
 
         {/* Actions */}
         <div className="bg-card border rounded-lg p-6 space-y-4">
-          <h2 className="text-xl font-semibold">Account Actions</h2>
+          <h2 className="text-xl font-semibold">Actions rapides</h2>
 
           <div className="space-y-3">
             <Button
               variant="outline"
               className="w-full justify-start"
-              onClick={() => toast.info('Edit profile feature coming soon')}
+              onClick={() =>
+                toast.info("Cette fonctionnalité est en cours de développement")
+              }
             >
-              Edit Profile
+              Mettre à jour mes informations
             </Button>
 
             <Button
               variant="outline"
               className="w-full justify-start"
-              onClick={() => toast.info('Change password feature coming soon')}
+              onClick={() =>
+                toast.info("Cette fonctionnalité est en cours de développement")
+              }
             >
-              Change Password
+              Changer mon mot de passe
             </Button>
 
             <Button
               variant="destructive"
-              className="w-full justify-start"
               onClick={handleLogout}
             >
-              Logout
+              Se déconnecter
             </Button>
           </div>
         </div>

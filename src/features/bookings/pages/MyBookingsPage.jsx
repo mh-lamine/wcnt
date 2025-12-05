@@ -5,7 +5,7 @@ export function MyBookingsPage() {
   const { isAuthenticated } = useAuth();
 
   if (!isAuthenticated) {
-    return <PleaseLogin message="Connectez-vous pour consulter vos réservations ou modifier votre profil." />;
+    return <PleaseLogin message="Connectez-vous ou créez un compte pour consulter vos réservations." />;
   }
 
   return (

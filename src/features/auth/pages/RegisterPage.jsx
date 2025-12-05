@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { toast } from "sonner";
+import { Button } from "@/shared/components/ui/button";
+import { Input } from "@/shared/components/ui/input";
+import { Label } from "@/shared/components/ui/label";
 
 export function RegisterPage() {
   const [formData, setFormData] = useState({
@@ -39,11 +42,11 @@ export function RegisterPage() {
           <img src="https://floatui.com/logo-dark.svg" width={150} />
           <div className=" mt-16 space-y-3">
             <h3 className="text-white text-3xl font-bold">
-              Start growing your business quickly
+              Trouvez un rendez-vous en moins de 2 minutes
             </h3>
             <p className="text-gray-300">
-              Create an account and get access to all features for 30-days, No
-              credit card required.
+              Créez un compte et prenez rendez-vous avec votre prestataire
+              préféré en quelques clics.
             </p>
             <div className="flex items-center -space-x-2 overflow-hidden">
               <img
@@ -67,7 +70,7 @@ export function RegisterPage() {
                 className="w-10 h-10 rounded-full border-2 border-white"
               />
               <p className="text-sm text-gray-400 font-medium translate-x-5">
-                Join 5.000+ users
+                + tous nos autres prestataires
               </p>
             </div>
           </div>
@@ -83,23 +86,25 @@ export function RegisterPage() {
       </div>
       <div className="flex-1 flex items-center justify-center h-screen">
         <div className="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
-          <div className="">
-            <img
-              src="https://floatui.com/logo.svg"
-              width={150}
-              className="lg:hidden"
-            />
+          <div>
+            <a href="/">
+              <img
+                src="https://floatui.com/logo.svg"
+                width={150}
+                className="lg:hidden"
+              />
+            </a>
             <div className="mt-5 space-y-2">
               <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">
-                Sign up
+                Bienvenue sur WeConnect
               </h3>
               <p className="">
-                Already have an account?{" "}
+                Comme un air de déjà vu ?{" "}
                 <a
                   href="/login"
-                  className="font-medium text-indigo-600 hover:text-indigo-500"
+                  className="font-medium text-brand hover:text-brand"
                 >
-                  Log in
+                  Je me connecte
                 </a>
               </p>
             </div>
@@ -204,15 +209,15 @@ export function RegisterPage() {
           <div className="relative">
             <span className="block w-full h-px bg-gray-300"></span>
             <p className="inline-block w-fit text-sm bg-white px-2 absolute -top-2 inset-x-0 mx-auto">
-              Or continue with
+              Ou continuer avec
             </p>
           </div>
           <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <label htmlFor="firstName" className="font-medium">
+            <div className="space-y-1">
+              <Label htmlFor="firstName">
                 Prénom
-              </label>
-              <input
+              </Label>
+              <Input
                 id="firstName"
                 type="text"
                 value={formData.firstName}
@@ -220,14 +225,13 @@ export function RegisterPage() {
                   setFormData({ ...formData, firstName: e.target.value })
                 }
                 required
-                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
               />
             </div>
-            <div>
-              <label htmlFor="lastName" className="font-medium">
+            <div className="space-y-1">
+              <Label htmlFor="lastName">
                 Nom
-              </label>
-              <input
+              </Label>
+              <Input
                 id="lastName"
                 type="text"
                 value={formData.lastName}
@@ -235,14 +239,13 @@ export function RegisterPage() {
                   setFormData({ ...formData, lastName: e.target.value })
                 }
                 required
-                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
               />
             </div>
-            <div>
-              <label htmlFor="email" className="font-medium">
+            <div className="space-y-1">
+              <Label htmlFor="email">
                 Email
-              </label>
-              <input
+              </Label>
+              <Input
                 id="email"
                 type="email"
                 value={formData.email}
@@ -250,14 +253,13 @@ export function RegisterPage() {
                   setFormData({ ...formData, email: e.target.value })
                 }
                 required
-                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
               />
             </div>
-            <div>
-              <label htmlFor="password" className="font-medium">
-                Password
-              </label>
-              <input
+            <div className="space-y-1">
+              <Label htmlFor="password">
+                Mot de passe
+              </Label>
+              <Input
                 id="password"
                 type="password"
                 value={formData.password}
@@ -265,17 +267,14 @@ export function RegisterPage() {
                   setFormData({ ...formData, password: e.target.value })
                 }
                 required
-                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
               />
             </div>
-            <button
+            <Button
               type="submit"
               disabled={loading}
-              className="w-full px-4 py-2 text-white font-medium bg-indigo-600
-              hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150"
             >
-              {loading ? "Creating account..." : "Register"}
-            </button>
+              {loading ? "C'est parti !" : "Je crée mon compte"}
+            </Button>
           </form>
         </div>
       </div>
