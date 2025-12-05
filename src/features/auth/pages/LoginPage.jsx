@@ -23,11 +23,11 @@ export function LoginPage() {
     setLoading(false);
 
     if (response.success) {
-      toast.success("Login successful!");
+      toast.success("Vous êtes connecté!");
       // Navigate based on role
       navigate(response.role === "customers" ? "/" : "/dashboard");
     } else {
-      toast.error(response.error || "Invalid credentials");
+      toast.error(response.error || "Une erreur s'est produite");
     }
   };
 

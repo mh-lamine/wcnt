@@ -48,7 +48,7 @@ export function ProfilePage() {
               <p className="font-medium">
                 {auth?.firstName && auth?.lastName
                   ? `${auth.firstName} ${auth.lastName}`
-                  : auth?.username || "Information manquante"}
+                  : auth?.name || "Information manquante"}
               </p>
             </div>
 

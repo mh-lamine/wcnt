@@ -28,10 +28,10 @@ export function RegisterPage() {
     setLoading(false);
 
     if (response.success) {
-      toast.success("Registration successful!");
+      toast.success("Vous êtes connecté !");
       navigate("/");
     } else {
-      toast.error(response.error || "Registration failed");
+      toast.error(response.error || "Une erreur s'est produite");
     }
   };
 
