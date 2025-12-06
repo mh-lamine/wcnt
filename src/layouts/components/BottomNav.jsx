@@ -49,9 +49,7 @@ export function BottomNav() {
   }
 
   return (
-    <nav
-      className="fixed bottom-0 left-0 right-0 bg-brand/10 shadow-[0_-4px_12px_rgba(0,0,0,0.2)] z-50"
-    >
+    <nav className="fixed bottom-0 left-0 right-0 bg-brand/10 shadow-[0_-4px_12px_rgba(0,0,0,0.2)] z-50">
       <div className="flex h-20 px-2">
         {navItems.map(({ path, icon: Icon, label }) => (
           <Link
@@ -63,8 +61,17 @@ export function BottomNav() {
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            <Icon className="w-6 h-6" />
+            <Icon
+              className={`transition-all w-5 h-5 ${
+                isActive(path) && "w-6 h-6"
+              }`}
+            />
             <span className="text-xs font-medium">{label}</span>
+            <div
+              className={`transition-all border-brand ${
+                isActive(path) ? "border w-8" : "border-0 w-0"
+              }`}
+            />
           </Link>
         ))}
       </div>
