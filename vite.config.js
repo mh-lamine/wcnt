@@ -26,7 +26,7 @@ export default defineConfig({
         short_name: "WeConnect",
         description:
           "Plateforme de réservation pour les professionnels de beauté et soin",
-        theme_color: "#743089",
+        theme_color: "#fff",
       },
 
       injectManifest: {

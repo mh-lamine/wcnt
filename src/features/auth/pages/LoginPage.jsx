@@ -97,7 +97,7 @@ export function LoginPage() {
               <p>
                 On ne s'est pas présentés ?{" "}
                 <Link
-                  href="/register"
+                  to="/register"
                   className="font-medium text-brand hover:text-indigo-500"
                 >
                   Je crée mon compte

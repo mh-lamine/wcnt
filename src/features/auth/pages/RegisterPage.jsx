@@ -105,7 +105,7 @@ export function RegisterPage() {
               <p>
                 Comme un air de déjà vu ?{" "}
                 <Link
-                  href="/login"
+                  to="/login"
                   className="font-medium text-brand hover:text-brand"
                 >
                   Je me connecte
