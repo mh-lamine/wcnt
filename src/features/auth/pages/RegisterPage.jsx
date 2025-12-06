@@ -91,7 +91,7 @@ export function RegisterPage() {
       <div className="flex-1 flex items-center justify-center h-screen">
         <div className="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
           <div>
-            <Link href="/">
+            <Link to="/">
               <img
                 src="https://floatui.com/logo.svg"
                 width={150}
