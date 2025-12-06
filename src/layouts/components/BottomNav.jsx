@@ -50,20 +50,20 @@ export function BottomNav() {
 
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 bg-card border-t shadow-[0_-4px_12px_rgba(0,0,0,0.2)] z-50"
+      className="fixed bottom-0 left-0 right-0 bg-brand/10 shadow-[0_-4px_12px_rgba(0,0,0,0.2)] z-50"
     >
-      <div className="flex bg-brand/10 justify-around items-center h-20 px-2">
+      <div className="flex h-20 px-2">
         {navItems.map(({ path, icon: Icon, label }) => (
           <Link
             key={path}
             to={path}
-            className={`flex flex-col items-center justify-center flex-1 h-full gap-1 transition-colors ${
+            className={`flex flex-col items-center pt-2 flex-1 h-full gap-1 transition-colors ${
               isActive(path)
                 ? "text-brand"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            <Icon className="w-5 h-5" />
+            <Icon className="w-6 h-6" />
             <span className="text-xs font-medium">{label}</span>
           </Link>
         ))}
