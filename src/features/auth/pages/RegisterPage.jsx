@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { toast } from "sonner";
 import { Button } from "@/shared/components/ui/button";
@@ -8,13 +8,13 @@ import { Label } from "@/shared/components/ui/label";
 
 export function RegisterPage() {
   const [formData, setFormData] = useState({
-    firstName: "",
     lastName: "",
+    firstName: "",
     email: "",
     password: "",
   });
   const [loading, setLoading] = useState(false);
-  const { register } = useAuth();
+  const { isAuthenticated, register } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -34,6 +34,10 @@ export function RegisterPage() {
       toast.error(response.error || "Une erreur s'est produite");
     }
   };
+
+  if (isAuthenticated) {
+    navigate("/");
+  }
 
   return (
     <main className="w-full flex">
@@ -87,25 +91,25 @@ export function RegisterPage() {
       <div className="flex-1 flex items-center justify-center h-screen">
         <div className="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
           <div>
-            <a href="/">
+            <Link href="/">
               <img
                 src="https://floatui.com/logo.svg"
                 width={150}
                 className="lg:hidden"
               />
-            </a>
+            </Link>
             <div className="mt-5 space-y-2">
               <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">
                 Bienvenue sur WeConnect
               </h3>
-              <p className="">
+              <p>
                 Comme un air de déjà vu ?{" "}
-                <a
+                <Link
                   href="/login"
                   className="font-medium text-brand hover:text-brand"
                 >
                   Je me connecte
-                </a>
+                </Link>
               </p>
             </div>
           </div>
@@ -214,23 +218,7 @@ export function RegisterPage() {
           </div>
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-1">
-              <Label htmlFor="firstName">
-                Prénom
-              </Label>
-              <Input
-                id="firstName"
-                type="text"
-                value={formData.firstName}
-                onChange={(e) =>
-                  setFormData({ ...formData, firstName: e.target.value })
-                }
-                required
-              />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="lastName">
-                Nom
-              </Label>
+              <Label htmlFor="lastName">Nom</Label>
               <Input
                 id="lastName"
                 type="text"
@@ -242,9 +230,20 @@ export function RegisterPage() {
               />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="email">
-                Email
-              </Label>
+              <Label htmlFor="firstName">Prénom</Label>
+              <Input
+                id="firstName"
+                type="text"
+                value={formData.firstName}
+                onChange={(e) =>
+                  setFormData({ ...formData, firstName: e.target.value })
+                }
+                required
+              />
+            </div>
+
+            <div className="space-y-1">
+              <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -256,9 +255,7 @@ export function RegisterPage() {
               />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="password">
-                Mot de passe
-              </Label>
+              <Label htmlFor="password">Mot de passe</Label>
               <Input
                 id="password"
                 type="password"
@@ -269,10 +266,7 @@ export function RegisterPage() {
                 required
               />
             </div>
-            <Button
-              type="submit"
-              disabled={loading}
-            >
+            <Button type="submit" disabled={loading}>
               {loading ? "C'est parti !" : "Je crée mon compte"}
             </Button>
           </form>

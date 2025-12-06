@@ -1,11 +1,19 @@
-import { useAuth } from '@/features/auth/hooks/useAuth';
-import { PleaseLogin } from '@/features/auth/components/PleaseLogin';
+import { useAuth } from "@/features/auth/hooks/useAuth";
+import { PleaseLogin } from "@/features/auth/components/PleaseLogin";
+import { useNavigate } from "react-router-dom";
 
 export function MyBookingsPage() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, role } = useAuth();
+  const navigate = useNavigate();
 
   if (!isAuthenticated) {
-    return <PleaseLogin message="Connectez-vous ou créez un compte pour consulter vos réservations." />;
+    return (
+      <PleaseLogin message="Connectez-vous ou créez un compte pour consulter vos réservations." />
+    );
+  }
+
+  if (role === "salons") {
+    navigate("/dashboard")
   }
 
   return (

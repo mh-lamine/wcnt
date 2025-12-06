@@ -1,22 +1,17 @@
-import { useAuth } from '@/features/auth/hooks/useAuth';
-import { PleaseLogin } from '@/features/auth/components/PleaseLogin';
-import { Button } from '@/shared/components/ui/button';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'sonner';
+import { useAuth } from "@/features/auth/hooks/useAuth";
+import { Button } from "@/shared/components/ui/button";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
-export function ProfilePage() {
-  const { isAuthenticated, auth, logout } = useAuth();
+export function SalonProfilePage() {
+  const { auth, logout } = useAuth();
   const navigate = useNavigate();
 
-  if (!isAuthenticated) {
-    return <PleaseLogin message="Login to view and edit your profile" />;
-  }
-
   const handleLogout = () => {
-    if (window.confirm('Are you sure you want to logout?')) {
+    if (window.confirm("Are you sure you want to logout?")) {
       logout();
-      toast.success('You have been logged out successfully');
-      navigate('/login');
+      toast.success("You have been logged out successfully");
+      navigate("/login");
     }
   };
 
@@ -46,9 +41,7 @@ export function ProfilePage() {
             <div>
               <p className="text-sm text-muted-foreground">Nom</p>
               <p className="font-medium">
-                {auth?.firstName && auth?.lastName
-                  ? `${auth.firstName} ${auth.lastName}`
-                  : auth?.name || "Information manquante"}
+                {auth?.name || "Information manquante"}
               </p>
             </div>
 
@@ -92,10 +85,7 @@ export function ProfilePage() {
               Changer mon mot de passe
             </Button>
 
-            <Button
-              variant="destructive"
-              onClick={handleLogout}
-            >
+            <Button variant="destructive" onClick={handleLogout}>
               Se déconnecter
             </Button>
           </div>

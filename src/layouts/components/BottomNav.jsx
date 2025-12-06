@@ -31,11 +31,11 @@ export function BottomNav() {
   ];
 
   // Provider navigation
-  const providerNavItems = [
+  const salonNavItems = [
     { path: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
     { path: "/services", icon: HandHelping, label: "Services" },
     { path: "/schedule", icon: Clock, label: "Horaires" },
-    { path: "/profile", icon: User, label: "Profil" },
+    { path: "/settings", icon: User, label: "Profil" },
   ];
 
   // Determine which nav items to show
@@ -45,7 +45,7 @@ export function BottomNav() {
   } else if (role === "customers") {
     navItems = customerNavItems;
   } else {
-    navItems = providerNavItems;
+    navItems = salonNavItems;
   }
 
   return (

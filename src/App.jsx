@@ -2,13 +2,14 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { RootLayout } from "@/layouts/RootLayout";
 import { LoginPage } from "@/features/auth/pages/LoginPage";
 import { RegisterPage } from "@/features/auth/pages/RegisterPage";
-import { RequireProvider } from "@/features/auth/components/RequireProvider";
+import { RequireSalon } from "@/features/auth/components/RequireSalon";
 import { HomePage } from "@/features/salons/pages/HomePage";
 import { MyBookingsPage } from "@/features/bookings/pages/MyBookingsPage";
-import { ProfilePage } from "@/features/profile/pages/ProfilePage";
+import { CustomerProfilePage } from "@/features/account/pages/CustomerProfilePage";
 import { DashboardPage } from "@/features/dashboard/pages/DashboardPage";
 import { ServicesPage } from "@/features/services/pages/ServicesPage";
 import { SchedulePage } from "@/features/schedule/pages/SchedulePage";
+import { SalonProfilePage } from "./features/account/pages/SalonProfilePage";
 import PWABadge from "./PWABadge";
 
 function App() {
@@ -26,31 +27,39 @@ function App() {
 
           {/* Customer routes with auth gate inside */}
           <Route path="/my-bookings" element={<MyBookingsPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/profile" element={<CustomerProfilePage />} />
 
           {/* Provider routes - fully protected */}
           <Route
             path="/dashboard"
             element={
-              <RequireProvider>
+              <RequireSalon>
                 <DashboardPage />
-              </RequireProvider>
+              </RequireSalon>
             }
           />
           <Route
             path="/services"
             element={
-              <RequireProvider>
+              <RequireSalon>
                 <ServicesPage />
-              </RequireProvider>
+              </RequireSalon>
             }
           />
           <Route
             path="/schedule"
             element={
-              <RequireProvider>
+              <RequireSalon>
                 <SchedulePage />
-              </RequireProvider>
+              </RequireSalon>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <RequireSalon>
+                <SalonProfilePage />
+              </RequireSalon>
             }
           />
         </Route>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { toast } from "sonner";
 import { Button } from "@/shared/components/ui/button";
@@ -12,7 +12,7 @@ export function LoginPage() {
     password: "",
   });
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { isAuthenticated, role, login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -30,6 +30,10 @@ export function LoginPage() {
       toast.error(response.error || "Une erreur s'est produite");
     }
   };
+
+  if (isAuthenticated) {
+    navigate("/");
+  }
 
   return (
     <main className="w-full flex">
@@ -83,21 +87,21 @@ export function LoginPage() {
       <div className="flex-1 flex items-center justify-center h-screen">
         <div className="w-full max-w-md space-y-8 px-4 bg-white text-gray-600 sm:px-0">
           <div>
-            <a href="/">
+            <Link to="/">
               <img src="https://floatui.com/logo.svg" width={150} />
-            </a>
+            </Link>
             <div className="mt-5 space-y-2">
               <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">
                 Connectez-vous pour continuer
               </h3>
-              <p className="">
+              <p>
                 On ne s'est pas présentés ?{" "}
-                <a
+                <Link
                   href="/register"
                   className="font-medium text-brand hover:text-indigo-500"
                 >
                   Je crée mon compte
-                </a>
+                </Link>
               </p>
             </div>
           </div>
@@ -206,9 +210,7 @@ export function LoginPage() {
           </div>
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-1">
-              <Label htmlFor="email">
-                Email
-              </Label>
+              <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -220,9 +222,7 @@ export function LoginPage() {
               />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="password">
-                Mot de passe
-              </Label>
+              <Label htmlFor="password">Mot de passe</Label>
               <Input
                 id="password"
                 type="password"
@@ -233,10 +233,7 @@ export function LoginPage() {
                 required
               />
             </div>
-            <Button
-              type="submit"
-              disabled={loading}
-            >
+            <Button type="submit" disabled={loading}>
               {loading ? "C'est parti !" : "Je me connecte"}
             </Button>
           </form>
